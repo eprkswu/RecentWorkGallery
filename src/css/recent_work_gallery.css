@@ -21,6 +21,7 @@ html, body{
     padding-left:25px;
 }
 .ti_wrapper {
+    height:70px;
     width: 100%;
     position: relative;
     overflow: hidden;
