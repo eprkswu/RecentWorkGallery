@@ -25,7 +25,7 @@ var displays = [
         address:'서울 종로구 종로 19 르메이에르 종로타운 4층, 413-2, 414-1호',
         poster:posterBase+'2_botong.jpg',
         icon:icons['1'],
-        position:[37.5707885,126.9776416],
+        position:[37.571022, 126.979830],
         marker:null
     },
     {
@@ -36,7 +36,7 @@ var displays = [
         address:'서울 마포구 독막로8길 16',
         poster:posterBase+'3_philosopher.jpg',
         icon:icons['1'],
-        position:[37.5472225,126.9155797],
+        position:[37.547448,126.917779],
         marker:null
     },
     {
@@ -47,7 +47,7 @@ var displays = [
         address:'서울 강남구 선릉로131길 17',
         poster:posterBase+'4_axis.jpg',
         icon:icons['1'],
-        position:[37.5172825,127.0372336],
+        position:[37.517491,127.039433],
         marker:null
     },
     {
@@ -58,7 +58,7 @@ var displays = [
         address:'서울 강남구 논현로175길 78, 4층',
         poster:posterBase+'5_hellios.jpg',
         icon:icons['1'],
-        position:[37.5236768,127.0204874],
+        position:[37.523902,127.022644],
         marker:null
     },
     {
@@ -69,7 +69,7 @@ var displays = [
         address:'서울 강남구 신사동 516-16, 1층',
         poster:posterBase+'6_here_there.jpg',
         icon:icons['1'],
-        position:[37.5183871,127.0194376],
+        position:[37.518647, 127.021594],
         marker:null
     },
     {
@@ -80,7 +80,7 @@ var displays = [
         address:'서울 마포구 백범로71 숨도빌딩 2층',
         poster:posterBase+'7_untitled.jpg',
         icon:icons['1'],
-        position:[37.5489621,126.9375352],
+        position:[37.549196,126.939713],
         marker:null
     },
     {
@@ -91,7 +91,7 @@ var displays = [
         address:'서울 중구 삼일대로 308',
         poster:posterBase+'8_memory.jpg',
         icon:icons['2'],
-        position:[37.5620764,126.9870787],
+        position:[37.562336,126.989246],
         marker:null
     },
     {
@@ -102,7 +102,7 @@ var displays = [
         address:'서울 성동구 뚝섬로1나길 5',
         poster:posterBase+'8_memory.jpg',
         icon:icons['2'],
-        position:[37.5443973,127.0455325],
+        position:[37.544621,127.047665],
         marker:null
     },
     {
@@ -113,7 +113,7 @@ var displays = [
         address:'경기도 성남시 분당구 대왕판교로645번길 14',
         poster:posterBase+'8_memory.jpg',
         icon:icons['2'],
-        position:[37.400202,127.1020522],
+        position:[37.400513,127.104380],
         marker:null
     },
     {
@@ -124,7 +124,7 @@ var displays = [
         address:'서울 종로구 효자로 33',
         poster:posterBase+'8_memory.jpg',
         icon:icons['2'],
-        position:[37.5790278,126.9714456],
+        position:[37.579085,126.973629],
         marker:null
     }
 ];
