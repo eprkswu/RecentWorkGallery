@@ -82,5 +82,49 @@ var displays = [
         icon:icons['1'],
         position:[37.5489621,126.9375352],
         marker:null
+    },
+    {
+        title:'기억',
+        writer:'홍범-강구룡',
+        date:'11.4 ~ 30',
+        placename:'루프트 명동',
+        address:'서울 중구 삼일대로 308',
+        poster:posterBase+'8_memory.jpg',
+        icon:icons['2'],
+        position:[37.5620764,126.9870787],
+        marker:null
+    },
+    {
+        title:'기억',
+        writer:'홍범-강구룡',
+        date:'11.1 ~ 12.11',
+        placename:'헤이그라운드',
+        address:'서울 성동구 뚝섬로1나길 5',
+        poster:posterBase+'8_memory.jpg',
+        icon:icons['2'],
+        position:[37.5443973,127.0455325],
+        marker:null
+    },
+    {
+        title:'기억',
+        writer:'홍범-강구룡',
+        date:'11.1 ~ 30',
+        placename:'네오위즈 판교타워',
+        address:'경기도 성남시 분당구 대왕판교로645번길 14',
+        poster:posterBase+'8_memory.jpg',
+        icon:icons['2'],
+        position:[37.400202,127.1020522],
+        marker:null
+    },
+    {
+        title:'기억',
+        writer:'홍범-강구룡',
+        date:'11.7 ~ 8',
+        placename:'통의동 보안여관',
+        address:'서울 종로구 효자로 33',
+        poster:posterBase+'8_memory.jpg',
+        icon:icons['2'],
+        position:[37.5790278,126.9714456],
+        marker:null
     }
 ];
