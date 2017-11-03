@@ -33,6 +33,7 @@ html, body{
     top: 0;
 }
 .ti_content {
+    height:70px;
     width: 8000px;
     position: relative;
     float: left;
