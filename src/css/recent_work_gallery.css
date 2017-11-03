@@ -1,0 +1,72 @@
+html, body{
+    margin:0 auto;
+}
+#map-canvas {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: -200px;
+    left: 0;
+    right: 0;
+    z-index: 0;
+}
+#container {
+    z-index: 100;
+    position: relative;
+}
+.top_bars{
+    height:70px;
+    background-color:#FFFFFF;
+    border-bottom:1px solid #000000;
+    padding-left:25px;
+}
+.ti_wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding: 8px;
+}
+.ti_slide {
+    width: 30000px;
+    position: relative;
+    left: 0;
+    top: 0;
+}
+.ti_content {
+    width: 8000px;
+    position: relative;
+    float: left;
+}
+.ti_news { float: left; }
+.poster_info {
+    width:350px;
+    padding-left:125px;
+    padding-bottom:25px;
+    position:absolute;
+}
+.poster_info .poster {
+    border:1px solid #000000;
+}
+.poster_info .info {
+    background-color:#FFFFFF;
+    padding:12px;
+    border:1px solid #000000;
+}
+.poster_info .info .placename {
+    line-height:17px;
+    font-size:12px;
+    font-weight:bold;
+}
+.poster_info .info .address {
+    line-height:17px;
+    font-size:12px;
+    font-weight:bold;
+}
+.poster_info .info .writer {
+    line-height:17px;
+    font-size:12px;
+}
+.poster_info .info .date {
+    line-height:17px;
+    font-size:12px;
+}

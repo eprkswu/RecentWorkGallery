@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link rel="stylesheet" type="text/css" href="../css/recent_work_gallery.css" media="all">
+    </head>
+    <body>
+        <div id="container">
+            <div class="top_bars">
+                <div class="ti_wrapper">
+                    <div class="ti_slide">
+                        <div class="ti_content">
+                            <div class="ti_news"><img src="../img/top_bar/bar-01.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e01.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/bar-02.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e01.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/bar-03.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e01.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/bar-04.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e02.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e02.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e02.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/bar-05.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e03.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/bar-06.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e03.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/bar-07.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e04.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e05.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e06.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e07.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e07.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e08.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e09.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e05.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e10.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e11.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e12.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e05.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e05.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e13.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e14.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e15.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e16.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/e01.png" /></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="poster_info" style="display:none;z-index:0">
+            <div class="poster"></div>
+            <div class="info">
+                <div class="placename"></div>
+                <div class="address"></div>
+                <div class="writer"></div>
+                <div class="date"></div>
+            </div>
+        </div>
+        <div id="map-canvas"></div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+        <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyC6hq7y2J0s50N7YFwmNrIi8k88KIVZG6Y&callback=initMap" async defer></script>
+        <script src="../js/jquery.tickerNews.min.js"></script>
+        <script src="../js/poster_data.js"></script>
+        <script type="text/javascript">
+            function initMap(){
+                var mapOptions = {
+                    zoom: 12,
+                    center: new google.maps.LatLng(37.5518842,126.9885983),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    disableDefaultUI: true,
+                    zoomControl: false,
+                    scaleControl: false,
+                    scrollwheel: false,
+                    disableDoubleClickZoom: true,
+                    draggable: false
+                };
+                var map = new google.maps.Map($('#map-canvas')[0], mapOptions);
+
+                for(var i in displays){
+                    displays[i].marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(displays[i].position[0],displays[i].position[1]),
+                        icon: displays[i].icon,
+                        zIndex:101,
+                        map: map
+                    });
+
+                    google.maps.event.addListener(displays[i].marker, 'click', (function(marker, i) {
+                        return function(e){
+                            map.setCenter(e.latLng);
+                            appendPosterInfo(displays[i]);
+                            for(var j in displays){
+                                if(j !== i){
+                                    displays[j].marker.setIcon(icons['3']);
+                                }else{
+                                    displays[j].marker.setIcon(displays[j].icon);
+                                }
+                            }
+                        }
+                    })(displays[i].marker, i));
+                }
+            }
+            function appendPosterInfo(display){
+                $('.poster_info').css('z-index',0);
+                $('.poster_info .poster').html('<img class="lazy" data-original="'+display.poster+'" style="width:100%" />');
+                $('.poster_info .poster img.lazy').lazyload({
+                    load:function(){
+                        $('.poster_info .poster').css('height',$('.poster_info .poster img').height());
+                        $('.poster_info').css({
+                            'top':($(window).height()-$('.poster_info').height()-100)+'px',
+                            'z-index':1
+                        });
+                    }
+                });
+                $('.poster_info .info .placename').text(display.placename);
+                $('.poster_info .info .address').text(display.address);
+                $('.poster_info .info .writer').html(display.writer+' <span>\''+display.title+'\'</span>');
+                $('.poster_info .info .date').text(display.date);
+                //$('.poster_info').css('top', ($(window).height()-$('.poster_info').height()-100)+'px');
+                $('.poster_info').show();
+                $(window).resize();
+            }
+            $(document).ready(function(){
+                $('.top_bars').newsTicker();
+            });
+        </script>
+    </body>
+</html>
