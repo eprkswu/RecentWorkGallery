@@ -97,6 +97,13 @@
                 };
                 var map = new google.maps.Map($('#map_canvas')[0], mapOptions);
 
+                map.addListener('click', function(){
+                    $('.poster_info').hide();
+                    for(var i in displays){
+                        displays[i].marker.setIcon(displays[i].icon);
+                    }
+                });
+
                 for(var i in displays){
                     displays[i].marker = new google.maps.Marker({
                         position: new google.maps.LatLng(displays[i].position[0], displays[i].position[1]),
@@ -160,7 +167,7 @@
             $(document).ready(function(){
                 $('.top_bars').newsTicker();
 
-                $('#map_canvas').click(function(){
+                $('#map_canvas').click(function(e){
                     $('.emoji').remove();
                 });
 
