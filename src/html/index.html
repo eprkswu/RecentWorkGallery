@@ -58,8 +58,9 @@
                 <div class="date"></div>
             </div>
         </div>
-        <div id="map-canvas"></div>
+        <div id="map_canvas"></div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
         <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyC6hq7y2J0s50N7YFwmNrIi8k88KIVZG6Y&callback=initMap" async defer></script>
         <script src="../js/jquery.tickerNews.min.js"></script>
@@ -77,20 +78,24 @@
                     disableDoubleClickZoom: true
                     //draggable: false
                 };
-                var map = new google.maps.Map($('#map-canvas')[0], mapOptions);
+                var map = new google.maps.Map($('#map_canvas')[0], mapOptions);
 
                 for(var i in displays){
                     displays[i].marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(displays[i].position[0],displays[i].position[1]),
+                        position: new google.maps.LatLng(displays[i].position[0], displays[i].position[1]),
                         icon: displays[i].icon,
                         zIndex:101,
                         map: map
                     });
 
-                    google.maps.event.addListener(displays[i].marker, 'click', (function(marker, i) {
+                    google.maps.event.addListener(displays[i].marker, 'click', (function(marker, i){
                         return function(e){
                             map.setCenter(e.latLng);
-                            appendPosterInfo(displays[i]);
+                            if(displays[i].type === 'all'){
+                                appendPosterInfo(displays[i], displays[i].poster_index);
+                            }else{
+                                appendPosterInfo(displays[i], displays[i].poster_index);
+                            }
                             for(var j in displays){
                                 if(j !== i){
                                     displays[j].marker.setIcon(icons['3']);
@@ -102,9 +107,25 @@
                     })(displays[i].marker, i));
                 }
             }
-            function appendPosterInfo(display){
-                $('.poster_info').css('z-index',0);
-                $('.poster_info .poster').html('<img class="lazy" data-original="'+display.poster+'" style="width:100%" />');
+            function appendPosterInfo(display, poster_index){
+                if(display !== null){
+                    $('.poster_info').css('z-index',0);
+                    var poster_html = '<img id="poster_'+poster_index+'" class="lazy" data-original="'+display_posters[poster_index].poster+'" style="width:100%" />';
+                    if(display.type === 'all'){
+                        poster_html += '<div class="prev"><a href="javascript:;"><img src="../img/image_slide_arrow/arrow_prev.png" /></a></div>';
+                        poster_html += '<div class="next"><a href="javascript:;"><img src="../img/image_slide_arrow/arrow_next.png" /></a></div>';
+                    }
+                    $('.poster_info .poster').html(poster_html);
+
+                    $('.poster_info .info .placename').text(display.placename);
+                    $('.poster_info .info .address').text(display.address);
+                    $('.poster_info .info .writer').html(display_posters[poster_index].writer+' <span>\''+display_posters[poster_index].title+'\'</span>');
+                    $('.poster_info .info .date').text(display.date);
+                }else{
+                    $('.poster_info .poster img.lazy').attr('data-original', display_posters[poster_index].poster);
+                    $('.poster_info .poster img.lazy').attr('id', 'poster_'+poster_index);
+                    $('.poster_info .info .writer').html(display_posters[poster_index].writer+' <span>\''+display_posters[poster_index].title+'\'</span>');
+                }
                 $('.poster_info .poster img.lazy').lazyload({
                     load:function(){
                         $('.poster_info .poster').css('height',$('.poster_info .poster img').height());
@@ -112,18 +133,65 @@
                             'top':($(window).height()-$('.poster_info').height()-50)+'px',
                             'z-index':1
                         });
+                        $('.poster_info .poster .prev, .poster_info .poster .next').css('top', (Math.ceil($('.poster_info').height()/2)-50)+'px');
                     }
                 });
-                $('.poster_info .info .placename').text(display.placename);
-                $('.poster_info .info .address').text(display.address);
-                $('.poster_info .info .writer').html(display.writer+' <span>\''+display.title+'\'</span>');
-                $('.poster_info .info .date').text(display.date);
-                //$('.poster_info').css('top', ($(window).height()-$('.poster_info').height()-100)+'px');
                 $('.poster_info').show();
                 $(window).resize();
             }
+            var iconInterval = null;
             $(document).ready(function(){
                 $('.top_bars').newsTicker();
+
+                $('#map_canvas').click(function(){
+                    $('.emoji').remove();
+                });
+
+                iconInterval = window.setInterval(function(){
+                    var emoji_top_max = ($(window).height()-50);
+                    var emoji_top_min = 70;
+                    var emoji_left_max = ($(window).width()-50);
+                    var emoji_left_min = 0;
+                    var emoji_top = Math.floor(Math.random() * (emoji_top_max-emoji_top_min+1))+emoji_top_min;
+                    var emoji_left = Math.floor(Math.random() * (emoji_left_max-emoji_left_min+1))+emoji_left_min;
+                    var emoji_name = Math.floor(Math.random() * (50-1))+1;
+                    if(emoji_name < 10){
+                        emoji_name = '0'+emoji_name;
+                    }
+                    var emoji_html = '<div class="emoji" style="top:'+emoji_top+'px;left:'+emoji_left+'px"><img src="../img/emoji/'+emoji_name+'.png" /></div>';
+                    $('body').append(emoji_html);
+
+                    $('.emoji').draggable({
+                        containment:'window',
+                        scroll:false
+                    });
+                }, 2000);
+
+                $(document).on('click', '.poster_info .poster .prev a', function(e){
+                    e.preventDefault();
+                    var poster_index = parseInt($('.poster_info .poster img').attr('id').replace('poster_', ''));
+                    var prevIndex = 0;
+                    if(poster_index === 0){
+                        prevIndex = (display_posters.length-1);
+                    }else{
+                        prevIndex = (poster_index-1);
+                    }
+
+                    appendPosterInfo(null, prevIndex);
+                });
+
+                $(document).on('click', '.poster_info .poster .next a', function(e){
+                    e.preventDefault();
+                    var poster_index = parseInt($('.poster_info .poster img').attr('id').replace('poster_', ''));
+                    var nextIndex = 0;
+                    if(poster_index === (display_posters.length-1)){
+                        nextIndex = 0;
+                    }else{
+                        nextIndex = (poster_index+1);
+                    }
+
+                    appendPosterInfo(null, nextIndex);
+                });
             });
         </script>
     </body>

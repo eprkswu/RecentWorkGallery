@@ -1,7 +1,7 @@
 html, body{
     margin:0 auto;
 }
-#map-canvas {
+#map_canvas {
     height: 100%;
     position: absolute;
     top: 0;
@@ -21,7 +21,7 @@ html, body{
     padding-left:25px;
 }
 .ti_wrapper {
-    height:70px;
+    height:55px;
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -33,13 +33,12 @@ html, body{
     top: 0;
 }
 .ti_content {
-    height:70px;
     width: 8000px;
     position: relative;
     float: left;
     padding-top:8px;
 }
-.ti_news { float: left; }
+.ti_news { float: left;}
 .poster_info {
     width:350px;
     padding-left:125px;
@@ -47,7 +46,20 @@ html, body{
     position:absolute;
 }
 .poster_info .poster {
-    border:1px solid #000000;
+     border:1px solid #000000;
+}
+.poster_info .poster img.hide{
+    display:none;
+}
+.poster_info .poster .prev {
+    position: absolute;
+    /*top: 30%;*/
+    padding-left: 10px;
+}
+.poster_info .poster .next {
+    position: absolute;
+    /*top: 30%;*/
+    margin-left:320px;
 }
 .poster_info .info {
     background-color:#FFFFFF;
@@ -71,4 +83,10 @@ html, body{
 .poster_info .info .date {
     line-height:17px;
     font-size:12px;
+}
+.emoji {
+    position:absolute;
+    width:50px;
+    height:50px;
+    z-index:110;
 }
