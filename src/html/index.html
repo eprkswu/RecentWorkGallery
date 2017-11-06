@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>리센트 워크 갤러리</title>
         <link rel="stylesheet" type="text/css" href="../css/recent_work_gallery.css" media="all">
     </head>
     <body>
@@ -47,6 +47,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="typing_box">
+                <a href="javascript:;">
+                    <img src="../img/typing_box_icon/type.png" />
+                </a>
             </div>
         </div>
         <div class="poster_info" style="display:none;z-index:0">
@@ -145,6 +150,11 @@
 
                 $('#map_canvas').click(function(){
                     $('.emoji').remove();
+                });
+
+                $('.typing_box a').click(function(e){
+                    e.preventDefault();
+                    window.open('./text_area_popup.html', 'TextArea', 'top=0,left=0,width=500,height=500');
                 });
 
                 iconInterval = window.setInterval(function(){

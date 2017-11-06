@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>리센트 워크 갤러리</title>
+    <link rel="stylesheet" type="text/css" href="../css/recent_work_gallery.css" media="all">
+    <style>
+        .text_area_layer{
+            padding-left:25px;
+            padding-right:25px;
+            padding-top:20px;
+            padding-bottom:20px;
+        }
+        h3{
+            margin:0 auto;
+            padding-top:20px;
+            padding-left:25px;
+        }
+    </style>
+</head>
+<body>
+    <h3>* Please type any words</h3>
+    <div class="text_area_layer">
+        <textarea class="recent_work_textarea"></textarea>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('.recent_work_textarea').width(($(window).width()-50)+'px');
+            $('.recent_work_textarea').height(($(window).height()-100)+'px');
+            $('.recent_work_textarea').focus();
+
+            $(window).resize(function(){
+                $('.recent_work_textarea').width(($(window).width()-50)+'px');
+                $('.recent_work_textarea').height(($(window).height()-100)+'px');
+            });
+        });
+    </script>
+</body>
+</html>

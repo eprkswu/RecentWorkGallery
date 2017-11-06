@@ -1,3 +1,11 @@
+@font-face {
+    font-family:'RWGemoRegular';
+    src:url(../font/RWGemo-Regular.eot) format('eot'), /* IE9 Compat Modes */
+        url(../font/RWGemo-Regular.eot?#iefix) format('embedded-opentype'), /* IE6-IE8 */
+        url(../font/RWGemo-Regular.woff2) format('woff2'), /* Super Modern Browsers */
+        url(../font/RWGemo-Regular.woff) format('woff'), /* Pretty Modern Browsers */
+        url(../font/RWGemo-Regular.woff) format("opentype");
+}
 html, body{
     margin:0 auto;
 }
@@ -13,6 +21,10 @@ html, body{
 #container {
     z-index: 100;
     position: relative;
+}
+#container .typing_box {
+    z-index:120;
+    float:right;
 }
 .top_bars{
     height:70px;
@@ -89,4 +101,9 @@ html, body{
     width:50px;
     height:50px;
     z-index:110;
+}
+.recent_work_textarea {
+    font-family:RWGemoRegular;
+    font-size:48px;
+    border:0;
 }
