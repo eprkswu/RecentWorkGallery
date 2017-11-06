@@ -33,7 +33,7 @@ html, body{
     padding-left:25px;
 }
 .ti_wrapper {
-    height:55px;
+    height:60px;
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -58,7 +58,9 @@ html, body{
     position:absolute;
 }
 .poster_info .poster {
-     border:1px solid #000000;
+    border-top:1px solid #000000;
+    border-left:1px solid #000000;
+    border-right:1px solid #000000;
 }
 .poster_info .poster img.hide{
     display:none;

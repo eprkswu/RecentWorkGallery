@@ -7,7 +7,7 @@ var icons = {
 };
 var displays = [
     {
-        date:'날짜 협의중',
+        date:'2017.11 ~ 12',
         placename:'디자인하우스',
         address:'서울 중구 동호로 310',
         icon:icons['1'],
