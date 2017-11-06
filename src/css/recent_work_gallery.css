@@ -19,11 +19,10 @@ html, body{
     z-index: 0;
 }
 #container {
-    z-index: 100;
+    z-index: 120;
     position: relative;
 }
 #container .typing_box {
-    z-index:120;
     float:right;
 }
 .top_bars{
