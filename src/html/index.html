@@ -75,6 +75,7 @@
                 <div class="date"></div>
             </div>
         </div>
+        <div class="poster_caching" style="display:none;"></div>
         <div id="map_canvas"></div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -175,6 +176,10 @@
                     e.preventDefault();
                     window.open('./text_area_popup.html', 'TextArea', 'top=0,left=0,width=500,height=500');
                 });
+
+                for(var i in display_posters){
+                    $('.poster_caching').append('<img src="'+display_posters[i].poster+'" />');
+                }
 
                 iconInterval = window.setInterval(function(){
                     var emoji_top_max = ($(window).height()-50);
