@@ -6,6 +6,7 @@
         url(../font/RWGemo-Regular.woff) format('woff'), /* Pretty Modern Browsers */
         url(../font/RWGemo-Regular.woff) format("opentype");
 }
+
 html, body{
     margin:0 auto;
 }
@@ -50,6 +51,10 @@ html, body{
     padding-top:8px;
 }
 .ti_news { float: left;}
+.typing_box {
+    padding-top: 20px;
+    padding-right: 15px;
+}
 .poster_info {
     width:350px;
     padding-left:125px;
@@ -83,21 +88,26 @@ html, body{
     line-height:17px;
     font-size:12px;
     font-weight:bold;
+    font-family:Malgun Gothic, Helvetica, Arial, San-serif;
 }
 .poster_info .info .address {
     line-height:17px;
     font-size:12px;
     font-weight:bold;
+    font-family:Malgun Gothic, Helvetica, Arial, San-serif;
 }
 .poster_info .info .writer {
     line-height:17px;
     font-size:12px;
+    font-family:Malgun Gothic, Helvetica, Arial, San-serif;
 }
 .poster_info .info .date {
     line-height:17px;
     font-size:12px;
+    font-family:Malgun Gothic, Helvetica, Arial, San-serif;
 }
 .emoji {
+	cursor:cell;
     position:absolute;
     width:50px;
     height:50px;
