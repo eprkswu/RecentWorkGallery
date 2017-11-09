@@ -10,9 +10,6 @@
 html, body{
     margin:0 auto;
 }
-a img{
-    border:0;
-}
 #map_canvas {
     height: 100%;
     position: absolute;
@@ -112,7 +109,7 @@ a img{
     font-size:12px;
     font-family:Malgun Gothic, Helvetica, Arial, San-serif;
 }
-.prev, .next, #barblink {
+.prev, .next {
     -webkit-animation: blink 2s;
     -webkit-animation-iteration-count: infinite;
     -moz-animation: blink 2s;
