@@ -90,6 +90,8 @@
         <script type="text/javascript" src="../js/jquery.tickerNews.min.js"></script>
         <script type="text/javascript" src="../js/poster_data.js"></script>
         <script type="text/javascript">
+            var iconInterval = null;
+            var posterInterval = null;
             function initMap(){
                 var mapOptions = {
                     zoom: 12,
@@ -147,6 +149,7 @@
                     if(display.type === 'all' || display.type === 'multi'){
                         poster_html += '<div class="prev"><a href="javascript:;"><img src="../img/image_slide_arrow/arrow_prev.png" /></a></div>';
                         poster_html += '<div class="next"><a href="javascript:;"><img src="../img/image_slide_arrow/arrow_next.png" /></a></div>';
+                        autoPoster();
                     }
 
                     $('.poster_info .poster').html(poster_html);
@@ -163,7 +166,7 @@
                 }
                 $('.poster_info .poster img.lazy').lazyload({
                     load:function(){
-                        $('.poster_info .poster').css('height',$('.poster_info .poster img').height());
+                        $('.poster_info .poster').css('height', $('.poster_info .poster img').height());
                         $('.poster_info').css({
                             'top':($(window).height()-$('.poster_info').height()-50)+'px',
                             'z-index':1
@@ -174,7 +177,13 @@
                 $('.poster_info').show();
                 $(window).resize();
             }
-            var iconInterval = null;
+
+            function autoPoster(){
+                posterInterval = window.setInterval(function(){
+                    $('.poster_info .poster .prev a').trigger('click');
+                }, posterIntervalTime);
+            }
+
             $(document).ready(function(){
                 $('.top_bars').newsTicker();
 
@@ -215,7 +224,15 @@
                         containment:'window',
                         scroll:false
                     });
-                }, 2000);
+                }, iconIntervalTime);
+
+                $(document).on('mouseenter', '.poster_info', function(){
+                    clearInterval(posterInterval);
+                });
+
+                $(document).on('mouseleave', '.poster_info', function(){
+                    autoPoster();
+                });
 
                 $(document).on('click', '.poster_info .poster .prev a', function(e){
                     e.preventDefault();

@@ -5,6 +5,8 @@ var icons = {
     '2': iconBase+'pin_2.png',
     '3': iconBase+'pin_3.png'
 };
+var iconIntervalTime = 2000;
+var posterIntervalTime = 2000;
 var displays = [
     {
         date:'2017.11 ~ 12',
