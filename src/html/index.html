@@ -111,6 +111,7 @@
                     for(var i in displays){
                         displays[i].marker.setIcon(displays[i].icon);
                     }
+                    $('.poster_info .poster').css({top:'0px',left:'0px'});
                 });
 
                 for(var i in displays){
@@ -124,6 +125,7 @@
                     google.maps.event.addListener(displays[i].marker, 'click', (function(marker, i){
                         return function(e){
                             map.setCenter(e.latLng);
+                            $('.poster_info .poster').css({top:'0px',left:'0px'});
                             appendPosterInfo(displays[i], displays[i].poster_index, 0);
                             for(var j in displays){
                                 if(j !== i){
