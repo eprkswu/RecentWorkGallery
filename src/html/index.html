@@ -122,7 +122,7 @@
                     google.maps.event.addListener(displays[i].marker, 'click', (function(marker, i){
                         return function(e){
                             map.setCenter(e.latLng);
-                            appendPosterInfo(displays[i], displays[i].poster_index);
+                            appendPosterInfo(displays[i], displays[i].poster_index, 0);
                             for(var j in displays){
                                 if(j !== i){
                                     displays[j].marker.setIcon(icons['3']);
