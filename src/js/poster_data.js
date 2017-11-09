@@ -7,7 +7,7 @@ var icons = {
 };
 var iconIntervalTime = 2000;
 var posterIntervalTime = 2000;
-var maxEmojiCount = 5000;
+var maxEmojiCount = 500;
 
 var displays = [
     {
