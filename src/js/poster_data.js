@@ -44,7 +44,7 @@ var displays = [
         position:[37.517491,127.039433],
         marker:null,
         poster_index:3,
-        type:''
+        type:'multi'
     },
     {
         date:'2017.11.7 ~ 2018.1.7',
@@ -137,7 +137,13 @@ var display_posters = [
     {
         title:'5개의 축',
         writer:'백현주-정진열',
-        poster:posterBase+'4_axis.jpg'
+        poster:[
+            posterBase+'4_axis_01.jpg',
+            posterBase+'4_axis_02.jpg',
+            posterBase+'4_axis_03.jpg',
+            posterBase+'4_axis_04.jpg',
+            posterBase+'4_axis_05.jpg'
+        ]
     },
     {
         title:'헬리오스 벽지',
