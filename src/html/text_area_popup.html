@@ -6,42 +6,63 @@
     <link rel="stylesheet" type="text/css" href="../css/recent_work_gallery.css" media="all">
     <style>
      	body{
-     	    font-family: courier new, courier, monospace;
+     	    font-family: courier, courier new, monospace;
             font-size: 14px;
         }
         .text_area_layer{
             padding-left:25px;
             padding-right:25px;
             padding-top:20px;
-        }
+        }       
         .download_layer{
+        	padding-top:20px;
             padding-left:25px;
+            padding-bottom:20px;
         }
         h3{
             margin:0 auto;
             padding-top:20px;
             padding-left:25px;            
         }
+        a:link{
+        text-decoration: none;
+        color: black;
+        border-bottom: 1px solid;
+		}
+		a:hover{
+		background-color: black;
+		color: white;
+		}
+		a:visited{
+        text-decoration: none;
+        color: black;
+        border-bottom: 1px solid;
+		}
+		.recent_work_textarea{
+		outline:0;
+
+		}
+		
     </style>
 </head>
 <body>
-    <h3>* Please type any words</h3>
+    <h3><font style="font-family:RWGemoRegular;">t</font> Please type any words</h3>
     <div class="text_area_layer">
         <textarea class="recent_work_textarea"></textarea>
     </div>
     <div class="download_layer">
-        <a href="../font/RWGemo-Regular.otf">(down)</a>
+        <a href="../font/RWGemo-Regular.otf">download the font</a>
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript">
         $(function(){
             $('.recent_work_textarea').width(($(window).width()-50)+'px');
-            $('.recent_work_textarea').height(($(window).height()-100)+'px');
+            $('.recent_work_textarea').height(($(window).height()-120)+'px');
             $('.recent_work_textarea').focus();
 
             $(window).resize(function(){
                 $('.recent_work_textarea').width(($(window).width()-50)+'px');
-                $('.recent_work_textarea').height(($(window).height()-100)+'px');
+                $('.recent_work_textarea').height(($(window).height()-120)+'px');
             });
         });
     </script>

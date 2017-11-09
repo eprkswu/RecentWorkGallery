@@ -19,27 +19,33 @@
                             <div class="ti_news"><img src="../img/top_bar/e03.png" /></div>
                             <div class="ti_news"><img src="../img/top_bar/bar-edit-03.png" /></div>
                             <div class="ti_news"><img src="../img/top_bar/e03.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/bar-04-01.png" /></div>
                             <div class="ti_news">
                                 <a href="http://recentworkgallery.com" target="_blank">
-                                    <img src="../img/top_bar/bar-04.png" />
+                                    <img id="barblink" src="../img/top_bar/bar-04-02.png" />
                                 </a>
                             </div>
+                            <div class="ti_news"><img src="../img/top_bar/bar-04-03.png" /></div>
                             <div class="ti_news"><img src="../img/top_bar/e02.png" /></div>
                             <div class="ti_news"><img src="../img/top_bar/e02.png" /></div>
                             <div class="ti_news"><img src="../img/top_bar/e02.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/bar-04-01.png" /></div>
                             <div class="ti_news">
                                 <a href="http://recentworkgallery.com" target="_blank">
-                                    <img src="../img/top_bar/bar-05.png" />
+                                    <img src="../img/top_bar/bar-05-02.png" />
                                 </a>
                             </div>
+                            <div class="ti_news"><img src="../img/top_bar/bar-04-03.png" /></div>
                             <div class="ti_news"><img src="../img/top_bar/e03.png" /></div>
                             <div class="ti_news"><img src="../img/top_bar/bar-edit-06.png" /></div>
                             <div class="ti_news"><img src="../img/top_bar/e03.png" /></div>
+                            <div class="ti_news"><img src="../img/top_bar/bar-04-01.png" /></div>
                             <div class="ti_news">
                                 <a href="http://thisweekendroom.com/wp/" target="_blank">
-                                    <img src="../img/top_bar/bar-07.png" />
+                                    <img id="barblink" src="../img/top_bar/bar-07-02.png" />
                                 </a>
                             </div>
+                            <div class="ti_news"><img src="../img/top_bar/bar-04-03.png" /></div>
                             <div class="ti_news"><img src="../img/top_bar/e04.png" /></div>
                             <div class="ti_news"><img src="../img/top_bar/e05.png" /></div>
                             <div class="ti_news"><img src="../img/top_bar/e06.png" /></div>
@@ -140,7 +146,9 @@
                         poster_html += '<div class="prev"><a href="javascript:;"><img src="../img/image_slide_arrow/arrow_prev.png" /></a></div>';
                         poster_html += '<div class="next"><a href="javascript:;"><img src="../img/image_slide_arrow/arrow_next.png" /></a></div>';
                     }
+
                     $('.poster_info .poster').html(poster_html);
+                    $('.poster_info .poster').draggable();
 
                     $('.poster_info .info .placename').text(display.placename);
                     $('.poster_info .info .address').text(display.address);
