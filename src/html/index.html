@@ -122,11 +122,7 @@
                     google.maps.event.addListener(displays[i].marker, 'click', (function(marker, i){
                         return function(e){
                             map.setCenter(e.latLng);
-                            if(displays[i].type === 'all'){
-                                appendPosterInfo(displays[i], displays[i].poster_index);
-                            }else{
-                                appendPosterInfo(displays[i], displays[i].poster_index);
-                            }
+                            appendPosterInfo(displays[i], displays[i].poster_index);
                             for(var j in displays){
                                 if(j !== i){
                                     displays[j].marker.setIcon(icons['3']);
@@ -138,11 +134,17 @@
                     })(displays[i].marker, i));
                 }
             }
-            function appendPosterInfo(display, poster_index){
+            function appendPosterInfo(display, poster_index, poster_sub_index){
+                var poster = '';
+                if($.isArray(display_posters[poster_index].poster) === true){
+                    poster = display_posters[poster_index].poster[poster_sub_index];
+                }else{
+                    poster = display_posters[poster_index].poster;
+                }
                 if(display !== null){
                     $('.poster_info').css('z-index',0);
-                    var poster_html = '<img id="poster_'+poster_index+'" class="lazy" data-original="'+display_posters[poster_index].poster+'" style="width:100%" />';
-                    if(display.type === 'all'){
+                    var poster_html = '<img id="poster_'+poster_index+'_'+poster_sub_index+'" data-display-type="'+display.type+'" class="lazy" data-original="'+poster+'" style="width:100%" />';
+                    if(display.type === 'all' || display.type === 'multi'){
                         poster_html += '<div class="prev"><a href="javascript:;"><img src="../img/image_slide_arrow/arrow_prev.png" /></a></div>';
                         poster_html += '<div class="next"><a href="javascript:;"><img src="../img/image_slide_arrow/arrow_next.png" /></a></div>';
                     }
@@ -155,8 +157,8 @@
                     $('.poster_info .info .writer').html(display_posters[poster_index].writer+' <span>\''+display_posters[poster_index].title+'\'</span>');
                     $('.poster_info .info .date').text(display.date);
                 }else{
-                    $('.poster_info .poster img.lazy').attr('data-original', display_posters[poster_index].poster);
-                    $('.poster_info .poster img.lazy').attr('id', 'poster_'+poster_index);
+                    $('.poster_info .poster img.lazy').attr('data-original', poster);
+                    $('.poster_info .poster img.lazy').attr('id', 'poster_'+poster_index+'_'+poster_sub_index);
                     $('.poster_info .info .writer').html(display_posters[poster_index].writer+' <span>\''+display_posters[poster_index].title+'\'</span>');
                 }
                 $('.poster_info .poster img.lazy').lazyload({
@@ -186,7 +188,13 @@
                 });
 
                 for(var i in display_posters){
-                    $('.poster_caching').append('<img src="'+display_posters[i].poster+'" />');
+                    if($.isArray(display_posters[i].poster) === true){
+                        for(var j in display_posters[i].poster){
+                            $('.poster_caching').append('<img src="'+display_posters[i].poster[j]+'" />');
+                        }
+                    }else{
+                        $('.poster_caching').append('<img src="'+display_posters[i].poster+'" />');
+                    }
                 }
 
                 iconInterval = window.setInterval(function(){
@@ -211,28 +219,56 @@
 
                 $(document).on('click', '.poster_info .poster .prev a', function(e){
                     e.preventDefault();
-                    var poster_index = parseInt($('.poster_info .poster img').attr('id').replace('poster_', ''));
-                    var prevIndex = 0;
-                    if(poster_index === 0){
-                        prevIndex = (display_posters.length-1);
+                    var poster_index = $('.poster_info .poster img').attr('id').replace('poster_', '');
+                    var poster_display_type = $('.poster_info .poster img').attr('data-display-type');
+                    poster_index = poster_index.split('_');
+                    poster_index[0] = parseInt(poster_index[0]);
+                    poster_index[1] = parseInt(poster_index[1]);
+                    var prev_poster_index = 0;
+                    var prev_poster_sub_index = 0;
+                    if(poster_display_type === 'multi' && $.isArray(display_posters[poster_index[0]].poster) === true){
+                        prev_poster_index = poster_index[0];
+                        if(poster_index[1] === 0){
+                            prev_poster_sub_index = (display_posters[prev_poster_index].length-1);
+                        }else{
+                            prev_poster_sub_index = (poster_index[1]-1);
+                        }
                     }else{
-                        prevIndex = (poster_index-1);
+                        if(poster_index[0] === 0){
+                            prev_poster_index = (display_posters.length-1);
+                        }else{
+                            prev_poster_index = (poster_index[0]-1);
+                        }
                     }
 
-                    appendPosterInfo(null, prevIndex);
+                    appendPosterInfo(null, prev_poster_index, prev_poster_sub_index);
                 });
 
                 $(document).on('click', '.poster_info .poster .next a', function(e){
                     e.preventDefault();
-                    var poster_index = parseInt($('.poster_info .poster img').attr('id').replace('poster_', ''));
-                    var nextIndex = 0;
-                    if(poster_index === (display_posters.length-1)){
-                        nextIndex = 0;
+                    var poster_index = $('.poster_info .poster img').attr('id').replace('poster_', '');
+                    var poster_display_type = $('.poster_info .poster img').attr('data-display-type');
+                    poster_index = poster_index.split('_');
+                    poster_index[0] = parseInt(poster_index[0]);
+                    poster_index[1] = parseInt(poster_index[1]);
+                    var next_poster_index = 0;
+                    var next_poster_sub_index = 0;
+                    if(poster_display_type === 'multi' && $.isArray(display_posters[poster_index[0]].poster) === true){
+                        next_poster_index = poster_index[0];
+                        if(poster_index[1] === (display_posters[next_poster_index].poster.length-1)){
+                            next_poster_sub_index = 0;
+                        }else{
+                            next_poster_sub_index = (poster_index[1]+1);
+                        }
                     }else{
-                        nextIndex = (poster_index+1);
+                        if(poster_index[0] === (display_posters.length-1)){
+                            next_poster_index = 0;
+                        }else{
+                            next_poster_index = (poster_index[0]+1);
+                        }
                     }
 
-                    appendPosterInfo(null, nextIndex);
+                    appendPosterInfo(null, next_poster_index, next_poster_sub_index);
                 });
             });
         </script>
