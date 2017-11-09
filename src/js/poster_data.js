@@ -1,23 +1,15 @@
 var iconBase = '../img/map_pin/';
 var posterBase = '../img/poster_image/';
 var icons = {
-    '1': iconBase+'pin_1.png',
-    '2': iconBase+'pin_2.png',
+    '1': iconBase+'pin_2.gif',
+    '2': iconBase+'pin_1.gif',
     '3': iconBase+'pin_3.png'
 };
 var iconIntervalTime = 2000;
 var posterIntervalTime = 2000;
+var maxEmojiCount = 5000;
+
 var displays = [
-    {
-        date:'2017.11 ~ 12',
-        placename:'디자인하우스',
-        address:'서울 중구 동호로 310',
-        icon:icons['1'],
-        position:[37.5619921,127.0030534],
-        marker:null,
-        poster_index:0,
-        type:''
-    },
     {
         date:'11.1 ~ 30',
         placename:'연세필정신건강의학과의원 광화문점',

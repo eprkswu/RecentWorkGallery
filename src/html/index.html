@@ -4,6 +4,13 @@
         <meta charset="UTF-8">
         <title>Recent Work Gallery</title>
         <link rel="stylesheet" type="text/css" href="../css/recent_work_gallery.css" media="all">
+        <link rel="shortcut icon" href="../img/ico/chu.ico">
+        <link rel="icon" href="../img/ico/chu-16.png" sizes="16x16"> 
+        <link rel="icon" href="../img/ico/chu-32.png" sizes="32x32"> 
+        <link rel="icon" href="../img/ico/chu-48.png" sizes="48x48"> 
+        <link rel="icon" href="../img/ico/chu-62.png" sizes="64x64"> 
+        <link rel="icon" href="../img/ico/chu.png" sizes="128x128">
+
     </head>
     <body>
         <div id="container">
@@ -68,7 +75,7 @@
             </div>
             <div class="typing_box">
                 <a href="javascript:;">
-                    <img src="../img/typing_box_icon/type.png" />
+                    <img src="../img/typing_box_icon/typebutton.png" />
                 </a>
             </div>
         </div>
@@ -85,14 +92,19 @@
         <div id="map_canvas"></div>
         <script type="text/javascript"src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
-        <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyC6hq7y2J0s50N7YFwmNrIi8k88KIVZG6Y&callback=initMap" async defer></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>            
         <script type="text/javascript" src="../js/jquery.tickerNews.min.js"></script>
         <script type="text/javascript" src="../js/poster_data.js"></script>
         <script type="text/javascript">
+        	var isMarkerClick = false;
             var iconInterval = null;
             var posterInterval = null;
-            function initMap(){
+            function initPreMap(){
+            	$.getScript('../js/richmarker.js', function(){
+            		initMap();
+            	});
+            }
+            function initMap(){            	    		
                 var mapOptions = {
                     zoom: 12,
                     center: new google.maps.LatLng(37.5518842,126.9885983),
@@ -106,34 +118,49 @@
                 };
                 var map = new google.maps.Map($('#map_canvas')[0], mapOptions);
 
-                map.addListener('click', function(){
-                    $('.poster_info').hide();
+                map.addListener('click', function(e){                
+                	if(isMarkerClick === false){
+                		stopPoster();
+                		$('.poster_info').hide();
+                	}
                     for(var i in displays){
-                        displays[i].marker.setIcon(displays[i].icon);
+                        //displays[i].marker.setIcon(displays[i].icon);
+                    	displays[i].marker.setContent('<div class="my-marker"><img src="'+displays[i].icon+'" /></div>');
                     }
-                    $('.poster_info .poster').css({top:'0px',left:'0px'});
+                    $('.poster_info .poster').css({top:'0px',left:'0px'});                    
                 });
 
                 for(var i in displays){
-                    displays[i].marker = new google.maps.Marker({
+                	displays[i].marker = new RichMarker({
+                        position: new google.maps.LatLng(displays[i].position[0], displays[i].position[1]),
+                        map: map,
+                        shadow:false,
+                        content: '<div class="my-marker"><img src="'+displays[i].icon+'" /></div>'
+					});
+                	
+                    /* displays[i].marker = new google.maps.Marker({
                         position: new google.maps.LatLng(displays[i].position[0], displays[i].position[1]),
                         icon: displays[i].icon,
                         zIndex:101,
                         map: map
-                    });
+                    }); */
 
                     google.maps.event.addListener(displays[i].marker, 'click', (function(marker, i){
                         return function(e){
-                            map.setCenter(e.latLng);
+                        	isMarkerClick = true;
+                            //map.setCenter(e.latLng);
+                            map.setCenter(marker.getPosition());
                             $('.poster_info .poster').css({top:'0px',left:'0px'});
                             appendPosterInfo(displays[i], displays[i].poster_index, 0);
                             for(var j in displays){
                                 if(j !== i){
-                                    displays[j].marker.setIcon(icons['3']);
+                                    //displays[j].marker.setIcon(icons['3']);
+                                	displays[j].marker.setContent('<div class="my-marker"><img src="'+icons['3']+'" /></div>');
                                 }else{
-                                    displays[j].marker.setIcon(displays[j].icon);
+                                    //displays[j].marker.setIcon(displays[j].icon);
+                                	displays[j].marker.setContent('<div class="my-marker"><img src="'+displays[j].icon+'" /></div>');
                                 }
-                            }
+                            }                          
                         }
                     })(displays[i].marker, i));
                 }
@@ -167,13 +194,15 @@
                     $('.poster_info .info .writer').html(display_posters[poster_index].writer+' <span>\''+display_posters[poster_index].title+'\'</span>');
                 }
                 $('.poster_info .poster img.lazy').lazyload({
-                    load:function(){
-                        $('.poster_info .poster').css('height', $('.poster_info .poster img').height());
-                        $('.poster_info').css({
-                            'top':($(window).height()-$('.poster_info').height()-50)+'px',
-                            'z-index':1
-                        });
-                        $('.poster_info .poster .prev, .poster_info .poster .next').css('top', (Math.ceil($('.poster_info').height()/2)-50)+'px');
+                    load:function(elements_left, settings){
+						$(this).load(function(){
+							$('.poster_info .poster').css('height', $('.poster_info .poster img').height());
+	                        $('.poster_info').css({
+	                            'top':($(window).height()-$('.poster_info').height()-50)+'px',
+	                            'z-index':1
+	                        });
+	                        $('.poster_info .poster .prev, .poster_info .poster .next').css('top', (Math.ceil($('.poster_info').height()/2)-50)+'px');
+                        });                 
                     }
                 });
                 $('.poster_info').show();
@@ -181,16 +210,25 @@
             }
 
             function autoPoster(){
-                clearInterval(posterInterval);
+            	stopPoster();
                 posterInterval = window.setInterval(function(){
                     $('.poster_info .poster .next a').trigger('click');
                 }, posterIntervalTime);
             }
+            
+            function stopPoster(){
+            	if(posterInterval !== null){
+            		clearInterval(posterInterval);
+            		posterInterval = null;
+            	}            	
+            }
 
-            $(document).ready(function(){
+            $(document).ready(function(){            	
+            
                 $('.top_bars').newsTicker();
 
                 $('#map_canvas').click(function(e){
+                	isMarkerClick = false;
                     $('.emoji').remove();
                 });
 
@@ -210,6 +248,11 @@
                 }
 
                 iconInterval = window.setInterval(function(){
+                	if($('.emoji').length >= maxEmojiCount){
+                		clearInterval(iconInterval);
+                		iconInterval = null;
+                		return;
+                	}
                     var emoji_top_max = ($(window).height()-50);
                     var emoji_top_min = 70;
                     var emoji_left_max = ($(window).width()-50);
@@ -230,7 +273,7 @@
                 }, iconIntervalTime);
 
                 $(document).on('mouseenter', '.poster_info', function(){
-                    clearInterval(posterInterval);
+                	stopPoster();
                 });
 
                 $(document).on('mouseleave', '.poster_info', function(){
@@ -289,8 +332,9 @@
                     }
 
                     appendPosterInfo(null, next_poster_index, next_poster_sub_index);
-                });
+                });                            
             });
         </script>
+        <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyDH_fG10F3SS0DFsQD6M9saQ8O6OyYLENE&callback=initPreMap" async defer></script>
     </body>
 </html>
