@@ -21,9 +21,6 @@ a img{
     left: 0;
     right: 0;
     z-index: 0;
-    opacity: 0.8;
-    filter:alpha(opacity=80);       /* For IE 5-7 */
-    -ms-filter:"alpha(opacity=80)"; /* For IE 8 */
 }
 #container {
     z-index: 120;
