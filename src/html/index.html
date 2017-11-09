@@ -83,12 +83,12 @@
         </div>
         <div class="poster_caching" style="display:none;"></div>
         <div id="map_canvas"></div>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
-        <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyC6hq7y2J0s50N7YFwmNrIi8k88KIVZG6Y&callback=initMap" async defer></script>
-        <script src="../js/jquery.tickerNews.min.js"></script>
-        <script src="../js/poster_data.js"></script>
+        <script type="text/javascript"src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+        <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyC6hq7y2J0s50N7YFwmNrIi8k88KIVZG6Y&callback=initMap" async defer></script>
+        <script type="text/javascript" src="../js/jquery.tickerNews.min.js"></script>
+        <script type="text/javascript" src="../js/poster_data.js"></script>
         <script type="text/javascript">
             function initMap(){
                 var mapOptions = {
@@ -142,7 +142,6 @@
                     poster = display_posters[poster_index].poster;
                 }
                 if(display !== null){
-                    $('.poster_info').hide();
                     $('.poster_info').css('z-index',0);
                     var poster_html = '<img id="poster_'+poster_index+'_'+poster_sub_index+'" data-display-type="'+display.type+'" class="lazy" data-original="'+poster+'" style="width:100%" />';
                     if(display.type === 'all' || display.type === 'multi'){
