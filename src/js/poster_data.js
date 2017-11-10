@@ -7,7 +7,7 @@ var icons = {
 };
 var iconIntervalTime = 2000;
 var posterIntervalTime = 2000;
-var maxEmojiCount = 500;
+var maxEmojiCount = 800;
 
 var displays = [
     {
@@ -77,8 +77,8 @@ var displays = [
         icon:icons['2'],
         position:[37.562336,126.989246],
         marker:null,
-        poster_index:0,
-        type:'all'
+        poster_index:8,
+        type:'multi'
     },
     {
         date:'11.1 ~ 12.11',
@@ -87,8 +87,8 @@ var displays = [
         icon:icons['2'],
         position:[37.544621,127.047665],
         marker:null,
-        poster_index:0,
-        type:'all'
+        poster_index:9,
+        type:'multi'
     },
     {
         date:'11.1 ~ 30',
@@ -97,18 +97,18 @@ var displays = [
         icon:icons['2'],
         position:[37.400513,127.104380],
         marker:null,
-        poster_index:0,
-        type:'all'
+        poster_index:10,
+        type:'multi'
     },
     {
-        date:'11.7 ~ 8',
-        placename:'통의동 보안여관',
+        date:'11.7 ~ 12.7',
+        placename:'B2 보안책방',
         address:'서울 종로구 효자로 33',
-        icon:icons['2'],
+        icon:icons['1'],
         position:[37.579085,126.973629],
         marker:null,
-        poster_index:0,
-        type:'all'
+        poster_index:7,
+        type:''
     }
 ];
 
@@ -158,5 +158,41 @@ var display_posters = [
         title:'기억',
         writer:'홍범-강구룡',
         poster:posterBase+'8_memory.jpg'
+    },
+    {
+        title:'',
+        writer:'',
+        poster:[
+            posterBase+'luft_01.jpg',
+            posterBase+'luft_02.jpg',
+            posterBase+'luft_03.jpg',
+            posterBase+'luft_04.jpg',
+            posterBase+'luft_05.jpg',
+            posterBase+'luft_06.jpg',
+            posterBase+'luft_07.jpg'
+        ]
+    },
+    {
+    	title:'',
+        writer:'',
+        poster:[
+            posterBase+'hey_01.jpg',
+            posterBase+'hey_02.jpg',
+            posterBase+'hey_03.jpg',
+            posterBase+'hey_04.jpg',
+            posterBase+'hey_05.jpg'
+        ]
+    },
+    {
+    	title:'',
+        writer:'',
+        poster:[
+            posterBase+'neo_01.jpg',
+            posterBase+'neo_02.jpg',
+            posterBase+'neo_03.jpg',
+            posterBase+'neo_04.jpg',
+            posterBase+'neo_05.jpg'
+        ]
     }
+    
 ];

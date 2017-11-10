@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Recent Work Gallery</title>
+        <title>Travel the Gallery!</title>
         <link rel="stylesheet" type="text/css" href="../css/recent_work_gallery.css" media="all">
         <link rel="shortcut icon" href="../img/ico/chu.ico">
         <link rel="icon" href="../img/ico/chu-16.png" sizes="16x16"> 
@@ -174,6 +174,13 @@
                 }else{
                     poster = display_posters[poster_index].poster;
                 }
+                var writer = '';
+                if(typeof(display_posters[poster_index].writer) !== 'undefined' && $.trim(display_posters[poster_index].writer) !== ''){
+                	writer = display_posters[poster_index].writer;
+                }
+                if(typeof(display_posters[poster_index].title) !== 'undefined' && $.trim(display_posters[poster_index].title) !== ''){
+                	writer += ' <span>\''+display_posters[poster_index].title+'\'</span>';
+                }
                 if(display !== null){
                     $('.poster_info').css('z-index',0);
                     var poster_html = '<img id="poster_'+poster_index+'_'+poster_sub_index+'" data-display-type="'+display.type+'" class="lazy" data-original="'+poster+'" style="width:100%" />';
@@ -185,15 +192,26 @@
 
                     $('.poster_info .poster').html(poster_html);
                     $('.poster_info .poster').draggable();
+                    
+                    var placename = address = date = '';
+                    if(typeof(display.placename) !== 'undefined' && $.trim(display.placename) !== ''){
+                    	placename = display.placename;
+                    }
+                    if(typeof(display.address) !== 'undefined' && $.trim(display.address) !== ''){
+                    	address = display.address;
+                    }
+                    if(typeof(display.date) !== 'undefined' && $.trim(display.date) !== ''){
+                    	date = display.date;
+                    }
 
-                    $('.poster_info .info .placename').text(display.placename);
-                    $('.poster_info .info .address').text(display.address);
-                    $('.poster_info .info .writer').html(display_posters[poster_index].writer+' <span>\''+display_posters[poster_index].title+'\'</span>');
-                    $('.poster_info .info .date').text(display.date);
+                    $('.poster_info .info .placename').text(placename);
+                    $('.poster_info .info .address').text(address);
+                    $('.poster_info .info .writer').html(writer);
+                    $('.poster_info .info .date').text(date);
                 }else{
                     $('.poster_info .poster img.lazy').attr('data-original', poster);
                     $('.poster_info .poster img.lazy').attr('id', 'poster_'+poster_index+'_'+poster_sub_index);
-                    $('.poster_info .info .writer').html(display_posters[poster_index].writer+' <span>\''+display_posters[poster_index].title+'\'</span>');
+                    $('.poster_info .info .writer').html(writer);
                 }
                 $('.poster_info .poster img.lazy').lazyload({
                     load:function(elements_left, settings){
