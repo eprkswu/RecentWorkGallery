@@ -118,14 +118,16 @@
                 };
                 var map = new google.maps.Map($('#map_canvas')[0], mapOptions);
 
-                map.addListener('click', function(e){                
+                map.addListener('click', function(e){
                 	if(isMarkerClick === false){
                 		stopPoster();
                 		$('.poster_info').hide();
-                	}
-                    for(var i in displays){
-                        //displays[i].marker.setIcon(displays[i].icon);
-                    	displays[i].marker.setContent('<div class="my-marker"><img src="'+displays[i].icon+'" /></div>');
+                        for(var i in displays){
+                            //displays[i].marker.setIcon(displays[i].icon);
+                            displays[i].marker.setContent('<div class="my-marker"><img src="'+displays[i].icon+'" /></div>');
+                        }
+                	}else{
+                        isMarkerClick = false;
                     }
                     $('.poster_info .poster').css({top:'0px',left:'0px'});                    
                 });
@@ -145,22 +147,22 @@
                         map: map
                     }); */
 
-                    google.maps.event.addListener(displays[i].marker, 'click', (function(marker, i){
+                    google.maps.event.addListener(displays[i].marker, 'click', (function(marker, index){
                         return function(e){
                         	isMarkerClick = true;
                             //map.setCenter(e.latLng);
                             map.setCenter(marker.getPosition());
                             $('.poster_info .poster').css({top:'0px',left:'0px'});
-                            appendPosterInfo(displays[i], displays[i].poster_index, 0);
+                            appendPosterInfo(displays[index], displays[index].poster_index, 0);
                             for(var j in displays){
-                                if(j !== i){
+                                if(j !== index){
                                     //displays[j].marker.setIcon(icons['3']);
                                 	displays[j].marker.setContent('<div class="my-marker"><img src="'+icons['3']+'" /></div>');
                                 }else{
                                     //displays[j].marker.setIcon(displays[j].icon);
                                 	displays[j].marker.setContent('<div class="my-marker"><img src="'+displays[j].icon+'" /></div>');
                                 }
-                            }                          
+                            }
                         }
                     })(displays[i].marker, i));
                 }
@@ -228,7 +230,6 @@
                 $('.top_bars').newsTicker();
 
                 $('#map_canvas').click(function(e){
-                	isMarkerClick = false;
                     $('.emoji').remove();
                 });
 
